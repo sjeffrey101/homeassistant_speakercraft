@@ -1,0 +1,9 @@
+{
+  "domain": "mqtt_media",
+  "name": "MQTT Media Player",
+  "documentation": "",
+  "dependencies": ["mqtt"],
+  "codeowners": [],
+  "requirements": [],
+  "version" : "1.0.0"
+}
