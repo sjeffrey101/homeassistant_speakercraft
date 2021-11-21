@@ -103,7 +103,7 @@ def checkwifi():
         sta_if.connect()
     
 
-client = MQTTClient("speakercraft", "mqtt_server", 1883)
+client = MQTTClient("speakercraft", "192.168.0.100", 1883)
 client.set_callback(sub_cb)
 client.connect()
 client.subscribe("speakercraft/command/+")
