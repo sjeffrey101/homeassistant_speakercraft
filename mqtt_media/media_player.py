@@ -202,37 +202,37 @@ class MQTTMediaPlayer(MediaPlayerEntity):
     
 
     async def async_turn_off(self):
-        self._mqtt.publish(self._topic_command, "Power Off")
+        await mqtt.async_publish(self.hass, self._topic_command, "Power Off")
         if self._default_volme > 0:
-            self._mqtt.publish(self._topic_command, "Volume Level " + str(self._default_volme))
+            await mqtt.async_publish(self.hass, self._topic_command, "Volume Level " + str(self._default_volme))
 
     async def async_turn_on(self):
         
         if self._default_source > 0:
-            self._mqtt.publish(self._topic_command, "Source " + str(self._default_source))
+            await mqtt.async_publish(self.hass, self._topic_command, "Source " + str(self._default_source))
         else:
-            self._mqtt.publish(self._topic_command, "Power On")
+            await mqtt.async_publish(self.hass, self._topic_command, "Power On")
             
 
     async def async_set_volume_level(self, volume):
         volumepc = volume * 100
-        self._mqtt.publish(self._topic_command, "Volume Level " + str(int(volumepc)))
+        await mqtt.async_publish(self.hass, self._topic_command, "Volume Level " + str(int(volumepc)))
 
     async def async_select_source(self, source):
         """Set the input source."""
         if source in self._source_list:
             source = self._source_reverse[source]
-            self._mqtt.publish(self._topic_command, "Source " + str(source))
+            await mqtt.async_publish(self.hass, self._topic_command, "Source " + str(source))
         
 
     async def async_mute_volume(self, mute):
         if mute:
-             self._mqtt.publish(self._topic_command, "Mute")
+             await mqtt.async_publish(self.hass, self._topic_command, "Mute")
         else:
-             self._mqtt.publish(self._topic_command, "Unmute")
+             await mqtt.async_publish(self.hass, self._topic_command, "Unmute")
         
     async def async_volume_up(self):
-        self._mqtt.publish(self._topic_command, "Volume Up")
+        await mqtt.async_publish(self.hass, self._topic_command, "Volume Up")
 
     async def async_volume_down(self):
-        self._mqtt.publish(self._topic_command, "Volume Down")
+        await mqtt.async_publish(self.hass, self._topic_command, "Volume Down")
